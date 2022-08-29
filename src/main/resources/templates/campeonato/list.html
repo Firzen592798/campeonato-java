@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{decorators/template}"
+>
+    <head>
+        <title></title>
+    </head>
+    
+    <body>
+    	<section layout:fragment="content">
+	        <h1>Campeonatos</h1>
+	        <div class="block-error" th:if="${message}">${message}</div>
+	        <a th:href="@{campeonato/form}">Novo</a>
+	        <table>
+	        <thead>
+	        	<tr>
+	        		<th>Temporada</th>
+	        		<th>Divisão</th>
+	        		<th>Ações</th>
+	        	</tr>
+	        </thead>
+	       	<tbody>
+		       	<tr th:each="campeonato: ${campeonatoLista}">
+		       		<td><span th:text="${campeonato.temporada}"></span></td>
+		       		<td><span th:text="${campeonato.divisao}"></span></td>
+		       		<td>
+		       			<a th:href="@{/campeonato/participantes(id=${campeonato.id})}">Participantes</a>
+		       			<a th:href="@{/campeonato/delete/{id}(id=${campeonato.id})}">Apagar</a>
+		       		</td>
+		       	</tr>
+	       	</tbody>
+	       	</table>
+       	</section>
+    </body>
+</html>

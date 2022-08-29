@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{decorators/template}"
+      >
+    <head>
+    	<!-- <link th:href="@{/global/global.css}" rel="stylesheet"> -->
+        <title></title>
+    </head>
+    <body>
+    	<section layout:fragment="content">
+	        <h1>Participantes</h1>
+	       	<form th:object="${participante}" th:action="@{/participante/form}" method="post">
+	       		<div class="error" th:if="${error}">[[${error}]]</div>
+	       		<input type="hidden" th:field="*{id}"/>
+	       		<div class="form-group">
+	       			<label for="nome">Participante: </label>
+	       			<input type="text" th:field="*{nome}">
+	       			<span th:if="${#fields.hasErrors('nome')}" class="field-error"  th:errors="*{nome}"></span>
+	       		</div>
+	       		<input type="submit" th:value="|${id != null ? 'Salvar' : 'Cadastrar'}|" />
+	       	</form>
+       	</section>
+    </body>
+</html>

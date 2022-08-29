@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{decorators/template}"
+>
+    <head>
+        <title></title>
+    </head>
+    
+    <body>
+    	<section layout:fragment="content">
+	        <h1>Participantes</h1>
+	        <div class="block-error" th:if="${message}">${message}</div>
+	        <a th:href="@{/participante/form}">Novo</a>
+	        <table>
+	        <thead>
+	        	<tr>
+	        		<th>Nome</th>
+	        		<th>Ações</th>
+	        	</tr>
+	        </thead>
+	       	<tbody>
+		       	<tr th:each="participante: ${participanteLista}">
+		       		<td><span th:text="${participante.nome}"></span></td>
+		       		<td>
+		       			<a th:href="@{/participante/edit/{id}(id=${participante.id})}">Editar</a>
+		       			<a th:href="@{/participante/delete/{id}(id=${participante.id})}">Apagar</a>
+		       		</td>
+		       	</tr>
+	       	</tbody>
+	       	</table>
+       	</section>
+    </body>
+</html>

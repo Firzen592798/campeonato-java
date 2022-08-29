@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{decorators/template}"
+      >
+    <head>
+    	<!-- <link th:href="@{/global/global.css}" rel="stylesheet"> -->
+        <title></title>
+    </head>
+    <body>
+    	<section layout:fragment="content">
+	        <h1>Participantes</h1>
+	       	<form th:object="${campeonato}" th:action="@{/campeonato/participantes}" method="post">
+     			<div  class="field-error" th:if="${#fields.hasAnyErrors()}" th:each="error : ${#fields.allErrors()}">
+     				[[${error}]]
+				</div>
+	       		<div class="error" th:if="${error}">[[${error}]]</div>
+	       		<input type="hidden" th:field="*{id}"/>
+	       		<input type="hidden" th:field="*{temporada}"/>
+	       		<input type="hidden" th:field="*{divisao}"/>
+	       		
+	       		<button type="submit" name="addRow">Add</button>
+	       		
+	       		<table>
+	       		<tr th:each="standing, status: ${campeonato.standings}">
+	       			
+	       			<td>
+	       				<input  type="hidden" th:field="*{standings[__${status.index}__].campeonato.id}"></input>
+	       				<input  type="hidden" th:field="*{standings[__${status.index}__].id}"></input>
+	       				<input placeholder="Posição" type="number" th:field="*{standings[__${status.index}__].posicao}"></input>
+	       			</td>
+	       			<td>
+	       				<select th:field="*{standings[__${status.index}__].participante}">
+	       					<option value="-1">Escolha um participante...</option>
+	       					<option th:each="opt: ${participanteLista}" th:selected="${opt.id == standing?.participante?.id}" th:value="${opt.id}" th:text="${opt.nome}"></option>
+	       				</select>
+	       			</td>
+	       			<td><input placeholder="Pontos" type="number" th:field="*{standings[__${status.index}__].pontos}"></input></td>
+	       			<td><input placeholder="Pontos fora" type="number" th:field="*{standings[__${status.index}__].pontosFora}"></input></td>
+	       			<td>
+	       				<button th:value="${status.index}" type="submit" name="removeRow">Remove</button>
+	       				<button th:value="${status.index}" type="submit" name="up">Up</button>
+	       				<button th:value="${status.index}" type="submit" name="down">Down</button>
+	       			</td>
+	       		</tr>
+	       		</table>
+	       		<input type="submit" value="Finalizar" />
+	       	</form>
+       	</section>
+    </body>
+</html>

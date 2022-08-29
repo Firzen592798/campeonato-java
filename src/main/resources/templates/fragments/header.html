@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+  	<meta charset="UTF-8" /> 
+  </head>
+  <body>
+    <div th:fragment="header" class="navbar navbar-inverse navbar-fixed-top" >
+	<header>
+		<ul>
+		  <li><a th:href="@{/campeonato}">Campeonato</a></li>
+		  <li><a th:href="@{/participante}">Participantes</a></li>
+		</ul>
+	</header>
+    </div>
+  </body>
+</html>
