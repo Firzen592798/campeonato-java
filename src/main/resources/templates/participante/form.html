@@ -12,7 +12,6 @@
     	<section layout:fragment="content">
 	        <h1>Participantes</h1>
 	       	<form th:object="${participante}" th:action="@{/participante/form}" method="post">
-	       		<div class="error" th:if="${error}">[[${error}]]</div>
 	       		<input type="hidden" th:field="*{id}"/>
 	       		<div class="form-group">
 	       			<label for="nome">Participante: </label>

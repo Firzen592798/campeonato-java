@@ -1,6 +1,8 @@
 package br.com.firzen.campeoanto.controller;
 
 import javax.validation.Valid;
+
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -40,7 +42,7 @@ public class ParticipanteController extends AbstractController<Participante> {
 	@PostMapping(URL_FORM)
 	public String form(@Valid Participante participante, BindingResult br, Model model) {
 		if (br.hasErrors()) {
-			return URL_FORM;
+			return URL_PAGE+URL_FORM;
 		} else {
 			service.save(participante);
 			return "redirect:";

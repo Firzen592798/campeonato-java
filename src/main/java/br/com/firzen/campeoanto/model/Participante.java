@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import br.com.firzen.campeoanto.validation.UniqueNome;
@@ -26,8 +27,8 @@ public class Participante {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotNull
+	@NotBlank(message = "Não pode estar em branco")
 	@Column
-	@UniqueNome
+	//@UniqueNome
 	private String nome;
 }
