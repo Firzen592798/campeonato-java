@@ -142,10 +142,18 @@ public class CampeonatoController extends AbstractController<Campeonato> {
 	}
 
 	
-	@GetMapping("/delete/{id}")
+	@GetMapping(URL_VIEW+"/{temporada}")
+	public ModelAndView view(@PathVariable("temporada") Integer temporada) {
+	    List<Campeonato> campeonatos = ((CampeonatoService) service).findByTemporada(temporada);
+	    ModelAndView ma = new ModelAndView(URL_PAGE+URL_VIEW);
+	    ma.addObject("campeonatoLista", campeonatos);
+	    return ma;
+	}
+	
+	@GetMapping(URL_DELETE+"{id}")
 	public ModelAndView delete(@PathVariable("id") long id) {
-	    Campeonato user = service.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid campeonato Id:" + id));
-	    service.delete(user);
-	    return new ModelAndView(new RedirectView(""));
+		Campeonato user = service.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid campeonato Id:" + id));
+		service.delete(user);
+		return new ModelAndView(new RedirectView("/"));
 	}
 }

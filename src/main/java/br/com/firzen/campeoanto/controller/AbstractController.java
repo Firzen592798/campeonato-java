@@ -10,6 +10,8 @@ public class AbstractController<T> {
 		
 	protected final static String URL_LIST = "/list";
 	
+	protected final static String URL_VIEW = "/view";
+	
 	protected final static String URL_FORM = "/form";
 	
 	protected final static String URL_EDIT = "/edit";

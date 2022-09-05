@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{decorators/template}">
+<head>
+<!-- <link th:href="@{/global/global.css}" rel="stylesheet"> -->
+<title></title>
+ 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">  
+ 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+ 	<script>
+	  	$(document).ready( function () {
+	  	    $('table').DataTable();
+	  	} );
+ 	</script>
+</head>
+<body>
+	<section layout:fragment="content" style="max-width: 700px">
+		<h1>Participantes</h1>
+
+		<div th:each="campeonato: ${campeonatoLista}">
+			<div class="list-header">
+				
+				<h3 th:text="|Divisão ${campeonato.divisao}|"></h3>
+				<div class="button-group">
+					<a class="btn" th:href="@{/campeonato/participantes(id=${campeonato.id})}"><i
+						class="bi bi-sticky"></i> Editar</a>
+					<a class="btn" th:href="@{/campeonato/delete/{id}(id=${campeonato.id})}"><i
+						class="bi bi-eraser"></i> Apagar</a>
+				</div>
+			</div>
+
+			<table class="cell-border compact stripe">
+				<thead>
+					<tr>
+						<th>Posição</th>
+						<th>Participante</th>
+						<th>Pontos</th>
+						<th>Pontos Fora</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="standing: ${campeonato?.standings}">
+						<td>[[${standing.posicao}]]</td>
+						<td>[[${standing.participante.nome}]]</td>
+						<td>[[${standing.pontos}]]</td>
+						<td>[[${standing.pontosFora}]]</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</section>
+</body>
+</html>

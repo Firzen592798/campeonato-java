@@ -1,5 +1,6 @@
 package br.com.firzen.campeoanto.services;
 
+import java.util.List;
 import java.util.Objects;
 
 import org.springframework.stereotype.Service;
@@ -27,5 +28,9 @@ public class CampeonatoService extends AbstractService<Campeonato>{
 	    }
 
 		return repository.save(campeonato);
+	}
+	
+	public List<Campeonato> findByTemporada(Integer temporada) {
+		return ((CampeonatoRepository) repository).findByTemporadaOrderByDivisaoAsc(temporada);
 	}
 }

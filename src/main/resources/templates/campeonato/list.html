@@ -6,28 +6,39 @@
 >
     <head>
         <title></title>
+    	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">  
+    	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+    	<script>
+	    	$(document).ready( function () {
+	    	    $('#table-campeonato').DataTable();
+	    	} );
+    	</script>
     </head>
     
     <body>
     	<section layout:fragment="content">
-	        <h1>Campeonatos</h1>
-	        <div class="block-error" th:if="${message}">${message}</div>
-	        <a th:href="@{campeonato/form}">Novo</a>
-	        <table>
+    		
+    		<div class="block-error" th:if="${message}">${message}</div>
+    		
+    		<div class="list-header">
+	        <h2>Campeonatos</h2>
+	         <a class="btn" th:href="@{campeonato/form}">Novo campeonato</a>
+	       	</div>
+	        
+	        <table id="table-campeonato" class="cell-border compact stripe">
 	        <thead>
 	        	<tr>
 	        		<th>Temporada</th>
-	        		<th>Divisão</th>
+	        		<!-- <th>Divisão</th> -->
 	        		<th>Ações</th>
 	        	</tr>
 	        </thead>
 	       	<tbody>
-		       	<tr th:each="campeonato: ${campeonatoLista}">
+		       	<tr th:each="campeonato, status: ${campeonatoLista}" th:if="${status.index == 0 || campeonato?.temporada != campeonatoLista[status.index-1]?.temporada}">
 		       		<td><span th:text="${campeonato.temporada}"></span></td>
-		       		<td><span th:text="${campeonato.divisao}"></span></td>
+		       		<!--<td><span th:text="${campeonato.divisao}"></span></td> -->
 		       		<td>
-		       			<a th:href="@{/campeonato/participantes(id=${campeonato.id})}">Participantes</a>
-		       			<a th:href="@{/campeonato/delete/{id}(id=${campeonato.id})}">Apagar</a>
+		       			<a class="btn" th:href="@{/campeonato/view/{id}(id=${campeonato.temporada})}"><i class="bi bi-people"></i></a>
 		       		</td>
 		       	</tr>
 	       	</tbody>

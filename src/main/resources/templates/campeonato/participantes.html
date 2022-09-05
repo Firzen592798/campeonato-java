@@ -20,14 +20,14 @@
 	       		<input type="hidden" th:field="*{temporada}"/>
 	       		<input type="hidden" th:field="*{divisao}"/>
 	       		
-	       		<button type="submit" name="addRow">Add</button>
+	       		<button type="submit" class="btn" name="addRow">Add</button>
 	       		
 	       		<table>
 	       		<tr th:each="standing, status: ${campeonato.standings}">
 	       			
 	       			<td>
-	       				<input  type="hidden" th:field="*{standings[__${status.index}__].campeonato.id}"></input>
-	       				<input  type="hidden" th:field="*{standings[__${status.index}__].id}"></input>
+	       				<input class="btn" type="hidden" th:field="*{standings[__${status.index}__].campeonato.id}"></input>
+	       				<input class="btn" type="hidden" th:field="*{standings[__${status.index}__].id}"></input>
 	       				<input placeholder="Posição" type="number" th:field="*{standings[__${status.index}__].posicao}"></input>
 	       			</td>
 	       			<td>
@@ -39,13 +39,13 @@
 	       			<td><input placeholder="Pontos" type="number" th:field="*{standings[__${status.index}__].pontos}"></input></td>
 	       			<td><input placeholder="Pontos fora" type="number" th:field="*{standings[__${status.index}__].pontosFora}"></input></td>
 	       			<td>
-	       				<button th:value="${status.index}" type="submit" name="removeRow">Remove</button>
-	       				<button th:value="${status.index}" type="submit" name="up">Up</button>
-	       				<button th:value="${status.index}" type="submit" name="down">Down</button>
+	       				<button class="btn" th:value="${status.index}" type="submit" name="removeRow"><i class="bi bi-trash3"></i></button>
+	       				<button class="btn"th:value="${status.index}" type="submit" name="up"><i class="bi bi-arrow-up-circle"></i></button>
+	       				<button class="btn" th:value="${status.index}" type="submit" name="down"><i class="bi bi-arrow-down-circle"></i></button>
 	       			</td>
 	       		</tr>
 	       		</table>
-	       		<input type="submit" value="Finalizar" />
+	       		<input class="btn" type="submit" value="Finalizar" />
 	       	</form>
        	</section>
     </body>
