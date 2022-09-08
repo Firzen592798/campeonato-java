@@ -6,10 +6,19 @@
   <body>
     <div th:fragment="header" class="navbar navbar-inverse navbar-fixed-top" >
 	<header>
-		<ul>
-		  <li><a th:href="@{/campeonato}">Campeonato</a></li>
-		  <li><a th:href="@{/participante}">Participantes</a></li>
-		</ul>
+		<div class="list-header">
+			<ul>
+			  <li><a th:href="@{/campeonato}">Campeonato</a></li>
+			  <li><a th:href="@{/participante}">Participantes</a></li>
+			</ul>
+			<ul >
+			  <li sec:authorize="isAuthenticated()">
+			  <form id="logout" th:action="@{/logout}" method="post">
+			    <a href="#" onclick="logout()">Logout</a>
+			  </form>
+			  </li>
+			</ul>
+		</div>
 	</header>
     </div>
   </body>

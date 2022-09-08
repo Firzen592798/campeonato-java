@@ -9,7 +9,7 @@
         <p>Click <a th:href="@{/hello}">here</a> to see a greeting.</p>
         
         <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
-		    <input type="submit" value="Logout" />
+		    <button type="submit" value="Logout"></button> 
 		</form>
     </body>
 </html>

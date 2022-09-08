@@ -1,14 +1,17 @@
 package br.com.firzen.campeoanto.config;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
@@ -29,6 +32,11 @@ public class WebSecurityConfig {
         return authConfig.getAuthenticationManager();
     }
     
+    /*@Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.inMemoryAuthentication().withUser("teste").password("{noop}teste").roles("ADMIN");
+    }*/
+    
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
@@ -48,14 +56,18 @@ public class WebSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
 			.antMatchers("/", "/home").permitAll()
-			.antMatchers("/campeonato").permitAll()
+			.antMatchers("/campeonato/**").authenticated()
+			.antMatchers("/participante/**").authenticated()
 			.anyRequest().permitAll()
 			.and()
 		.formLogin()
 			.loginPage("/login")
+			.defaultSuccessUrl("/campeonato", true)
 			.permitAll()
 			.and()
 		.logout()
+		.logoutUrl("/logout")
+		.logoutSuccessUrl("/login")
 			.permitAll()
 			.and()
         .exceptionHandling().accessDeniedPage("/403");
@@ -63,8 +75,6 @@ public class WebSecurityConfig {
  
         return http.build();
     }
-    
-    
  
     
     @Bean

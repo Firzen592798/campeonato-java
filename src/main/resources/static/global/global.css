@@ -6,9 +6,12 @@ body{
 
 /* HEADER */
 
+header{
+	background-color: #333333;
+}
+
 .navbar{
 	display: block;
-	
 }
 
 .navbar ul {
@@ -23,7 +26,7 @@ body{
   float: left;
 }
 
-.navbar li a {
+.navbar li a,button {
   display: block;
   background: gray;
   text-align: center;
