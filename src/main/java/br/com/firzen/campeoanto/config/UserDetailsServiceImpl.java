@@ -2,10 +2,12 @@ package br.com.firzen.campeoanto.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.*;
+import org.springframework.stereotype.Service;
 
 import br.com.firzen.campeoanto.model.User;
 import br.com.firzen.campeoanto.repository.UserRepository;
  
+@Service
 public class UserDetailsServiceImpl implements UserDetailsService {
  
     @Autowired

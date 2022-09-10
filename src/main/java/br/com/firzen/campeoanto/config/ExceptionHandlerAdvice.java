@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.firzen.campeoanto.exceptions.InvalidOperationException;
 import br.com.firzen.campeoanto.exceptions.NotFoundException;
+import br.com.firzen.campeoanto.exceptions.RestException;
 
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -34,6 +35,16 @@ public class ExceptionHandlerAdvice {
 		errors.put("message", ex.getMessage());
 		errors.put("code", "404");
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errors);
+	}
+	
+	@ResponseBody
+	@ExceptionHandler(RestException.class) // Tudo q for EmployeeNotFoundException é tratado aqui
+	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+	ResponseEntity<?> handleRestException(RestException ex) {
+		Map<String, String> errors = new HashMap<String, String>();
+		errors.put("message", ex.getMessage());
+		errors.put("code", "500");
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errors);
 	}
 
 	@ResponseBody
