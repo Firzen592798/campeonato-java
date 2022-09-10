@@ -29,8 +29,11 @@ public class ExceptionHandlerAdvice {
 	@ResponseBody
 	@ExceptionHandler(NotFoundException.class) // Tudo q for EmployeeNotFoundException é tratado aqui
 	@ResponseStatus(HttpStatus.NOT_FOUND)
-	ResponseEntity<String> employeeNotFoundHandler(NotFoundException ex) {
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+	ResponseEntity<?> employeeNotFoundHandler(NotFoundException ex) {
+		Map<String, String> errors = new HashMap<String, String>();
+		errors.put("message", ex.getMessage());
+		errors.put("code", "404");
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errors);
 	}
 
 	@ResponseBody
