@@ -1,4 +1,4 @@
-package br.com.firzen.campeoanto.config;
+package br.com.firzen.campeoanto.rest.config;
 
 import java.io.Serializable;
 import java.util.Date;

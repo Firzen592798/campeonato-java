@@ -10,7 +10,8 @@
     </head>
     <body>
     	<section layout:fragment="content">
-	        <h1>Participantes</h1>
+    		<div class="form-container">	
+	        <h2>Novo participante</h2>
 	       	<form th:object="${participante}" th:action="@{/participante/form}" method="post">
 	       		<input type="hidden" th:field="*{id}"/>
 	       		<div class="form-group">
@@ -18,8 +19,12 @@
 	       			<input type="text" th:field="*{nome}">
 	       			<span th:if="${#fields.hasErrors('nome')}" class="field-error"  th:errors="*{nome}"></span>
 	       		</div>
-	       		<input type="submit" th:value="|${id != null ? 'Salvar' : 'Cadastrar'}|" />
+	       		<div class="space-between-center mt-2">
+	       		<a class="btn btn-cancel" th:href="@{/campeonato}">Voltar</a>
+	       		<input class="btn btn-success" type="submit" th:value="|${id != null ? 'Salvar' : 'Cadastrar'}|" />
+	       		</div>
 	       	</form>
+	       	</div>
        	</section>
     </body>
 </html>

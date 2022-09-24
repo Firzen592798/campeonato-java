@@ -25,8 +25,9 @@ public class CampeonatoRestController {
 	}
 
 	@GetMapping("/{id}")
-	public @ResponseBody ResponseEntity<?> view(@PathVariable Long id){
-		Campeonato camp = campeonatoService.findById(id).orElseThrow(() -> new NotFoundException("Campeonato não encontrado"));
-		return ResponseEntity.ok(camp);
+	public @ResponseBody ResponseEntity<Campeonato> view(@PathVariable Long id){
+		return campeonatoService.findById(id).map(ResponseEntity::ok)
+				//.map( cliente -> ResponseEntity.ok(cliente))
+				.orElse(ResponseEntity.notFound().build());
 	}
 }

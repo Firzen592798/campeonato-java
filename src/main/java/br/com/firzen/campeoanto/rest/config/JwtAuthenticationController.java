@@ -1,4 +1,4 @@
-package br.com.firzen.campeoanto.controller;
+package br.com.firzen.campeoanto.rest.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.firzen.campeoanto.config.JwtTokenUtil;
 import br.com.firzen.campeoanto.config.UserDetailsServiceImpl;
 import br.com.firzen.campeoanto.exceptions.RestException;
 import br.com.firzen.campeoanto.model.JwtRequest;

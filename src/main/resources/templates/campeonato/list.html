@@ -6,13 +6,6 @@
 >
     <head>
         <title></title>
-    	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">  
-    	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
-    	<script>
-	    	$(document).ready( function () {
-	    	    $('#table-campeonato').DataTable();
-	    	} );
-    	</script>
     </head>
     
     <body>
@@ -20,12 +13,12 @@
     		
     		<div class="block-error" th:if="${message}">${message}</div>
     		
-    		<div class="list-header">
-	        <h2>Campeonatos</h2>
-	         <a class="btn" th:href="@{campeonato/form}">Novo campeonato</a>
+    		<div class="space-between-center">
+		        <h2>Campeonatos</h2>
+		         <a class="btn btn-primary" th:href="@{campeonato/form}">Novo campeonato</a>
 	       	</div>
 	        
-	        <table id="table-campeonato" class="cell-border compact stripe">
+	        <table id="table-campeonato" class="table cell-border compact stripe">
 	        <thead>
 	        	<tr>
 	        		<th>Temporada</th>

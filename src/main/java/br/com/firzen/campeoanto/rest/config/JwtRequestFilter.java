@@ -1,4 +1,4 @@
-package br.com.firzen.campeoanto.config;
+package br.com.firzen.campeoanto.rest.config;
 
 import java.io.IOException;
 
@@ -14,6 +14,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+
+import br.com.firzen.campeoanto.config.UserDetailsServiceImpl;
 import io.jsonwebtoken.ExpiredJwtException;
 
 @Component

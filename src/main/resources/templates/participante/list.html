@@ -6,32 +6,26 @@
 >
     <head>
         <title></title>
-    	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">  
-    	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
-    	<script>
-	    	$(document).ready( function () {
-	    	    $('table').DataTable();
-	    	} );
-    	</script>
-    
     <body>
     	<section layout:fragment="content">
-	        <h1>Participantes</h1>
-	        <div class="block-error" th:if="${message}">${message}</div>
-	        <a th:href="@{/participante/form}">Novo</a>
-	        <table  class="cell-border compact stripe">
+    		<div class="d-flex justify-content-between align-items-center">
+    			<h1>Participantes</h1>
+	        	<a class="btn btn-primary" th:href="@{/participante/form}">Novo</a>
+    		</div>
+	        
+	        <table  class="table table-striped table-dark ">
 		        <thead>
 		        	<tr>
-		        		<th>Nome</th>
-		        		<th>Ações</th>
+		        		<th scope="col">Nome</th>
+		        		<th scope="col">Ações</th>
 		        	</tr>
 		        </thead>
 		       	<tbody>
 			       	<tr th:each="participante: ${participanteLista}">
-			       		<td><span th:text="${participante.nome}"></span></td>
+			       		<td th:text="${participante.nome}">></td>
 			       		<td>
-			       			<a th:href="@{/participante/edit/{id}(id=${participante.id})}">Editar</a>
-			       			<a th:href="@{/participante/delete/{id}(id=${participante.id})}">Apagar</a>
+			       			<a class="btn btn-primary btn-sm" th:href="@{/participante/edit/{id}(id=${participante.id})}"><i class="bi bi-sticky"></i></a>
+			       			<a class="btn btn-danger btn-sm" th:href="@{/participante/delete/{id}(id=${participante.id})}"><i class="bi bi-eraser"></i></a>
 			       		</td>
 			       	</tr>
 		       	</tbody>

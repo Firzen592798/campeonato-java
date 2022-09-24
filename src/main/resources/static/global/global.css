@@ -10,21 +10,13 @@ header{
 	background-color: #333333;
 }
 
-.navbar{
-	display: block;
+.space-between-center{
+	display:flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
-.navbar ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #333333;
-}
 
-.navbar li {
-  float: left;
-}
 
 .navbar li a,button {
   display: block;
@@ -38,9 +30,8 @@ header{
 /* Inputs*/
 
 input, select{
-	padding: 6px 0px;
-	border: 1px solid lightgray;
-	margin: 3px 0px;
+	border-color: #beee !important;
+	border-width: 1px;
 }
 
 /* Buttons */
@@ -59,11 +50,6 @@ input, select{
 
 /* List View */
 
-.list-header{
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
 
 
 .navbar li a:hover {
@@ -90,28 +76,14 @@ footer{
 /* FORMS */
 
 .form-container{
-  max-width: 400px;
-  padding: 10px 30px;
-  margin: auto;
-  background-color: #fff;
-  border-radius: 4.2px;
-  box-shadow: 0px 3px 10px -2px rgba(0, 0, 0, 0.2);	
+	margin: 8% !important;
+	padding: 10px 30px;
+	margin: auto;
+	background-color: #fff;
+	border-radius: 4.2px;
+	box-shadow: 0px 3px 10px -2px rgba(0, 0, 0, 0.2);	
 }
 
-.form-group>input{
-	width: 100%;
-}
-
-.form-group label{
-	display: block;
-	padding-bottom: 5px;
-}
-
-.button-group{
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
 
 .success{
 	background-color: blue;

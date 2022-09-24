@@ -10,28 +10,31 @@
     </head>
     <body>
     	<section layout:fragment="content">
+    	 	
     		<div class="form-container">	
-		        <h1>Campeonatos</h1>
+	    		<h2>Novo campeonato</h2>
+	    		<hr />
 		       	<form th:object="${campeonato}" th:action="@{form}" method="post">
 		       		<input type="hidden" th:field="*{id}"/>
 		       		<div class="form-group">
 		       			<label for="temporada">Temporada: </label>
-		       			<input type="number" th:field="*{temporada}">
+		       			<input type="number" required th:field="*{temporada}">
 		       			 <span th:if="${#fields.hasErrors('temporada')}" class="field-error"  th:errors="*{temporada}"></span>
 		       		</div>
 		       		<div class="form-group">
 		       			<label for="divisao">Divisão: </label>
-		       			<input type="number" th:field="*{divisao}">
+		       			<input type="number" required th:field="*{divisao}">
 		       			<span th:if="${#fields.hasErrors('divisao')}" class="field-error" th:errors="*{divisao}"></span>
 		       		</div>
 	    			<div class="form-group">
 		       			<label for="divisao">Número de participantes: </label>
-		       			<input type="number" th:field="*{numParticipantes}">
+		       			<input type="number" required th:field="*{numParticipantes}">
 		       			<span th:if="${#fields.hasErrors('numParticipantes')}" class="field-error" th:errors="*{numParticipantes}"></span>
 		       		</div>
-		       		<div class="button-group">
-		       			<input class="btn" type="reset" value="Voltar" />
-		       			<input class="btn" type="submit" value="Cadastrar" />
+		       		
+		       		<div class="space-between-center mt-2">
+		       			<a class="btn btn-cancel" type="reset" th:href="@{/campeonato}">Voltar</a>
+		       			<input class="btn btn-success" type="submit" value="Cadastrar" />
 		       		</div>
 		       	</form>
 	       	</div>

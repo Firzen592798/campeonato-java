@@ -7,31 +7,27 @@
 <head>
 <!-- <link th:href="@{/global/global.css}" rel="stylesheet"> -->
 <title></title>
- 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">  
- 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
- 	<script>
-	  	$(document).ready( function () {
-	  	    $('table').DataTable();
-	  	} );
- 	</script>
+
 </head>
 <body>
-	<section layout:fragment="content" style="max-width: 700px">
-		<h1>Participantes</h1>
+	<section layout:fragment="content">
+		<h2>Participantes</h2>
 
 		<div th:each="campeonato: ${campeonatoLista}">
-			<div class="list-header">
+			<br/>
+			<div class="d-flex justify-content-between">
 				
 				<h3 th:text="|Divisão ${campeonato.divisao}|"></h3>
+				
 				<div class="button-group">
-					<a class="btn" th:href="@{/campeonato/participantes(id=${campeonato.id})}"><i
+					<a class="btn btn-primary" th:href="@{/campeonato/participantes(id=${campeonato.id})}"><i
 						class="bi bi-sticky"></i> Editar</a>
-					<a class="btn" th:href="@{/campeonato/delete/{id}(id=${campeonato.id})}"><i
+					<a class="btn btn-danger" th:href="@{/campeonato/delete/{id}(id=${campeonato.id})}"><i
 						class="bi bi-eraser"></i> Apagar</a>
 				</div>
 			</div>
-
-			<table class="cell-border compact stripe">
+			<br/>
+			<table class="table">
 				<thead>
 					<tr>
 						<th>Posição</th>

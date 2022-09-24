@@ -37,15 +37,6 @@ public class ExceptionHandlerAdvice {
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errors);
 	}
 	
-	@ResponseBody
-	@ExceptionHandler(RestException.class) // Tudo q for EmployeeNotFoundException é tratado aqui
-	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-	ResponseEntity<?> handleRestException(RestException ex) {
-		Map<String, String> errors = new HashMap<String, String>();
-		errors.put("message", ex.getMessage());
-		errors.put("code", "500");
-		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errors);
-	}
 
 	@ResponseBody
 	@ExceptionHandler(InvalidOperationException.class) // Tudo q for EmployeeNotFoundException é tratado aqui
@@ -54,28 +45,6 @@ public class ExceptionHandlerAdvice {
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exception.getLocalizedMessage());
 	}
 
-	@ResponseStatus(HttpStatus.BAD_REQUEST)
-	@ExceptionHandler(MethodArgumentNotValidException.class)
-	public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
-		Map<String, String> errors = new HashMap<>();
-		ex.getBindingResult().getAllErrors().forEach((error) -> {
-			String fieldName = ((FieldError) error).getField();
-			String errorMessage = error.getDefaultMessage();
-			errors.put(fieldName, errorMessage);
-		});
-		return errors;
-	}
-	
-	@ExceptionHandler(ConstraintViolationException.class)
-	public Map<String, String> handleConstraintViolationException(ConstraintViolationException ex) {
-		Map<String, String> errors = new HashMap<>();
-		ex.getConstraintViolations().forEach((error) -> {
-			String fieldName = "field";
-			String errorMessage = error.getMessage();
-			errors.put(fieldName, errorMessage);
-		});
-		return errors;
-	}
 	
 	@ExceptionHandler(Exception.class)
 	public ModelAndView  handleDataIntegrityViolationException(HttpServletRequest request, DataIntegrityViolationException ex) {

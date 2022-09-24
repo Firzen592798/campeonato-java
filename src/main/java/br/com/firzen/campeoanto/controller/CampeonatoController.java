@@ -88,13 +88,13 @@ public class CampeonatoController extends AbstractController<Campeonato> {
 	}
 	
 	@PostMapping(URL_PARTICIPANTES)
-	public ModelAndView saveParticipante(@Valid Campeonato campeonato, BindingResult br, RedirectAttributes ra) {
+	public ModelAndView saveParticipantes(@Valid Campeonato campeonato, BindingResult br, RedirectAttributes ra) {
 		if(br.hasErrors()) {
 			ra.addAttribute("participanteLista", participanteRepository.findAll());
 			return new ModelAndView();
 		}
 		try {
-			ModelAndView modelAndView = new ModelAndView(new RedirectView("/campeonato", true));
+			ModelAndView modelAndView = new ModelAndView(new RedirectView("/"+URL_PAGE+URL_VIEW+"/"+campeonato.getTemporada(), true));
 			service.save(campeonato);
 			ra.addFlashAttribute("success", "Salvo com sucesso");
 			return modelAndView;	
@@ -109,7 +109,9 @@ public class CampeonatoController extends AbstractController<Campeonato> {
 	@PostMapping(value=URL_PARTICIPANTES, params={"addRow"})
 	public String addRow(Model model, final Campeonato campeonato, final BindingResult br) {
 		model.addAttribute("participanteLista", participanteRepository.findAll());
-		campeonato.addStanding(new Standing());
+		Standing s = new Standing();
+		s.setPosicao(campeonato.getStandings().size() + 1);
+		campeonato.addStanding(s);
 		return URL_PAGE+URL_PARTICIPANTES;	
 	}
 	

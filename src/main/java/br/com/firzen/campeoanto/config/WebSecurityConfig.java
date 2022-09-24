@@ -18,6 +18,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import br.com.firzen.campeoanto.rest.config.JwtAuthenticationEntryPoint;
+import br.com.firzen.campeoanto.rest.config.JwtRequestFilter;
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 @EnableWebSecurity //Autoriza o Spring Security a suportar e prover a integração com Spring MVC
@@ -66,10 +69,8 @@ public class WebSecurityConfig {
 		// dont authenticate this particular request
 		.authorizeRequests().antMatchers("/authenticate").permitAll().
 		and().authorizeRequests().antMatchers("/firzen/authenticate").permitAll().
-		// all other requests need to be authenticated
-		antMatchers("/rest/**").authenticated().and().
-		// make sure we use stateless session; session won't be used to
-		// store user's state.
+		//antMatchers("/rest/**").authenticated().
+		and().
 		exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
 		.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     	
