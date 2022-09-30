@@ -16,25 +16,27 @@
 	    		<hr />
 		       	<form th:object="${campeonato}" th:action="@{form}" method="post">
 		       		<input type="hidden" th:field="*{id}"/>
-		       		<div class="form-group">
-		       			<label for="temporada">Temporada: </label>
-		       			<input type="number" required th:field="*{temporada}">
-		       			 <span th:if="${#fields.hasErrors('temporada')}" class="field-error"  th:errors="*{temporada}"></span>
-		       		</div>
-		       		<div class="form-group">
-		       			<label for="divisao">Divisão: </label>
-		       			<input type="number" required th:field="*{divisao}">
-		       			<span th:if="${#fields.hasErrors('divisao')}" class="field-error" th:errors="*{divisao}"></span>
-		       		</div>
-	    			<div class="form-group">
-		       			<label for="divisao">Número de participantes: </label>
-		       			<input type="number" required th:field="*{numParticipantes}">
-		       			<span th:if="${#fields.hasErrors('numParticipantes')}" class="field-error" th:errors="*{numParticipantes}"></span>
-		       		</div>
-		       		
-		       		<div class="space-between-center mt-2">
-		       			<a class="btn btn-cancel" type="reset" th:href="@{/campeonato}">Voltar</a>
-		       			<input class="btn btn-success" type="submit" value="Cadastrar" />
+		       		<div class="row">
+			       		<div class="form-group col-md-4 col-12">
+			       			<label for="temporada">Temporada</label>
+			       			<input class="form-control" type="number" required th:field="*{temporada}">
+			       			 <span th:if="${#fields.hasErrors('temporada')}" class="field-error"  th:errors="*{temporada}"></span>
+			       		</div>
+			       		<div class="form-group col-md-4 col-12">
+			       			<label for="divisao">Divisão</label>
+			       			<input class="form-control" type="number" required th:field="*{divisao}">
+			       			<span th:if="${#fields.hasErrors('divisao')}" class="field-error" th:errors="*{divisao}"></span>
+			       		</div>
+		    			<div class="form-group col-md-4 col-12">
+			       			<label for="divisao">Número de participantes</label>
+			       			<input class="form-control" type="number" required th:field="*{numParticipantes}">
+			       			<span th:if="${#fields.hasErrors('numParticipantes')}" class="field-error" th:errors="*{numParticipantes}"></span>
+			       		</div>
+			       		
+			       		<div class="space-between-center mt-2">
+			       			<a class="btn btn-cancel" type="reset" th:href="@{/campeonato}">Voltar</a>
+			       			<input class="btn btn-success" type="submit" value="Cadastrar" />
+			       		</div>
 		       		</div>
 		       	</form>
 	       	</div>

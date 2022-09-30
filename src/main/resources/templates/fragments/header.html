@@ -7,11 +7,17 @@
     <div th:fragment="header" >
 	<header>
 		<ul class="nav">
+      	   <li class="nav-item d-flex align-items-center">
+		    <img class="logo " th:src="@{/imgs/dados.png}"></img>
+		  </li>
 		  <li class="nav-item">
 		    <a class="nav-link text-white" aria-current="page" th:href="@{/campeonato}">Campeonato</a>
 		  </li>
 		  <li class="nav-item">
 		    <a class="nav-link text-white" th:href="@{/participante}">Participantes</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link text-white" th:href="@{/user}">Usuários</a>
 		  </li>
 		  <li class="nav-item" sec:authorize="isAuthenticated()">
 		    <form id="logout" th:action="@{/logout}" method="post">

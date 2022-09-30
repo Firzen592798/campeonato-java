@@ -18,20 +18,21 @@
 		         <a class="btn btn-primary" th:href="@{campeonato/form}">Novo campeonato</a>
 	       	</div>
 	        
-	        <table id="table-campeonato" class="table cell-border compact stripe">
+	        <table id="table-campeonato" class="custom-table">
 	        <thead>
 	        	<tr>
 	        		<th>Temporada</th>
 	        		<!-- <th>Divisão</th> -->
-	        		<th>Ações</th>
+	        		<th class="fixed-cell">Ações</th>
 	        	</tr>
 	        </thead>
 	       	<tbody>
 		       	<tr th:each="campeonato, status: ${campeonatoLista}" th:if="${status.index == 0 || campeonato?.temporada != campeonatoLista[status.index-1]?.temporada}">
 		       		<td><span th:text="${campeonato.temporada}"></span></td>
 		       		<!--<td><span th:text="${campeonato.divisao}"></span></td> -->
-		       		<td>
+		       		<td style="width: 100px;">
 		       			<a class="btn" th:href="@{/campeonato/view/{id}(id=${campeonato.temporada})}"><i class="bi bi-people"></i></a>
+		       			<a class="btn" th:href="@{/campeonato/delete/{id}(id=${campeonato.temporada})}"><i class="bi bi-trash"></i></a>
 		       		</td>
 		       	</tr>
 	       	</tbody>

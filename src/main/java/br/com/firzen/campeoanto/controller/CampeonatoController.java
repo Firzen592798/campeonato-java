@@ -56,18 +56,26 @@ public class CampeonatoController extends AbstractController<Campeonato> {
 	}
 	
 	@PostMapping(URL_FORM)
-	public ModelAndView save(@Valid Campeonato campeonato, BindingResult br, Model model) {
+	public ModelAndView save(@Valid Campeonato campeonato, RedirectAttributes ra,  BindingResult br, Model model) {
 		if(br.hasErrors()) {
 			return new ModelAndView();
 		}
 		try {
 			service.save(campeonato);
-			model.addAttribute("success", "Salvo com sucesso");
+			ra.addFlashAttribute("success", "Salvo com sucesso");
 		} catch (NegocioException e) {
 			model.addAttribute("error", e.getMessage());
 			return new ModelAndView();
 		}
-		ModelAndView modelAndView = new ModelAndView(new RedirectView(URL_PAGE));
+		ModelAndView modelAndView = new ModelAndView(new RedirectView("/"+URL_PAGE+URL_VIEW+"/"+campeonato.getTemporada(), true));
+		return modelAndView;
+	}
+	
+	@GetMapping(URL_DELETE+"/{temporada}")
+	public ModelAndView delete(RedirectAttributes ra, @PathVariable Integer temporada) {
+		ModelAndView modelAndView = new ModelAndView(new RedirectView("/"+URL_PAGE, true));
+		ra.addFlashAttribute("success", "Deletado com sucesso");
+		((CampeonatoService)service).deletarTemporada(temporada);
 		return modelAndView;
 	}
 	

@@ -11,8 +11,10 @@
 </head>
 <body>
 	<section layout:fragment="content">
+		<div class="d-flex justify-content-between">
 		<h2>Participantes</h2>
-
+		<a class="btn btn-cancel" th:href="@{/campeonato}">Voltar</a>
+		</div>
 		<div th:each="campeonato: ${campeonatoLista}">
 			<br/>
 			<div class="d-flex justify-content-between">
@@ -27,7 +29,7 @@
 				</div>
 			</div>
 			<br/>
-			<table class="table">
+			<table class="custom-table">
 				<thead>
 					<tr>
 						<th>Posição</th>

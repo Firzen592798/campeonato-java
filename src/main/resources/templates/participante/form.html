@@ -12,11 +12,12 @@
     	<section layout:fragment="content">
     		<div class="form-container">	
 	        <h2>Novo participante</h2>
+	        <hr />
 	       	<form th:object="${participante}" th:action="@{/participante/form}" method="post">
 	       		<input type="hidden" th:field="*{id}"/>
-	       		<div class="form-group">
+	       		<div class="form-group col-md-4 col-12">
 	       			<label for="nome">Participante: </label>
-	       			<input type="text" th:field="*{nome}">
+	       			<input type="text" class="form-control " th:field="*{nome}">
 	       			<span th:if="${#fields.hasErrors('nome')}" class="field-error"  th:errors="*{nome}"></span>
 	       		</div>
 	       		<div class="space-between-center mt-2">

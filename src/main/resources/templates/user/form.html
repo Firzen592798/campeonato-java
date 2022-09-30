@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{decorators/template}">
+    <head>
+        <title>Novo usuario</title>
+    </head>
+    <body>
+	    <section layout:fragment="content">
+    		<div class="form-container">	
+		        <h2>Novo usuario</h2>
+		        <hr />
+		       	<form th:action="@{/user/form}" method="post" th:object="${user}">
+			       	<input type="hidden" th:field="*{id}"/>
+			       	
+		       		<div class="form-group col-md-4 col-12">
+		       			<label for="nome">Login: </label>
+		       			<input type="text" class="form-control " th:field="*{username}">
+		       			<span th:if="${#fields.hasErrors('username')}" class="field-error"  th:errors="*{username}"></span>
+		       		</div>
+		       		
+		       		<div class="form-group col-md-4 col-12">
+		       			<label for="nome">Senha: </label>
+		       			<input type="text" class="form-control " th:field="*{password}">
+		       			<span th:if="${#fields.hasErrors('password')}" class="field-error"  th:errors="*{password}"></span>
+		       		</div>
+		       		
+		       		<div class="form-group col">
+						<label for="papel">Papel:</label> 
+						<select id="papel" class="form-select-sm" th:field="*{roles}">
+							<option value="-1">Escolha um papel...</option>
+							<option th:each="opt: ${roleLista}"
+								th:value="${opt.id}" th:text="${opt.name}"></option>
+						</select>
+					</div>
+		       		
+		       		<div class="space-between-center mt-2">
+			       		<a class="btn btn-cancel" th:href="@{/user}">Voltar</a>
+			       		<input class="btn btn-success" type="submit" th:value="|${id != null ? 'Salvar' : 'Cadastrar'}|" />
+		       		</div>
+		       	</form>
+	       	</div>
+       	 </section>
+    </body>
+   
+</html>
