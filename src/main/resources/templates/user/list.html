@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{decorators/template}"
+>
+    <head>
+        <title></title>
+    <body>
+    	<section layout:fragment="content">
+    		<div class="d-flex justify-content-between align-items-center">
+    			<h1>Usuários</h1>
+	        	<a class="btn btn-primary" th:href="@{/user/form}">Novo</a>
+    		</div>
+	        
+	        <table class="custom-table">
+		        <thead>
+		        	<tr>
+		        		<th scope="col">Nome</th>
+		        		<th class="fixed-cell" scope="col">Ações</th>
+		        	</tr>
+		        </thead>
+		       	<tbody>
+			       	<tr th:each="user: ${userLista}">
+			       		<td th:text="${user.username}">></td>
+			       		<td class="text-center">
+			       			<a class="btn btn-sm" th:href="@{/user/edit/{id}(id=${user.id})}"><i class="bi bi-pencil"></i></a>
+			       			<a class="btn btn-sm" th:href="@{/user/delete/{id}(id=${user.id})}"><i class="bi bi-eraser"></i></a>
+			       		</td>
+			       	</tr>
+		       	</tbody>
+	       	</table>
+       	</section>
+    </body>
+</html>
