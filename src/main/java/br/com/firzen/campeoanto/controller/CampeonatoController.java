@@ -10,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,10 +22,10 @@ import org.springframework.web.servlet.view.RedirectView;
 import br.com.firzen.campeoanto.exceptions.NegocioException;
 import br.com.firzen.campeoanto.exceptions.NotFoundException;
 import br.com.firzen.campeoanto.model.Campeonato;
-import br.com.firzen.campeoanto.model.Participante;
 import br.com.firzen.campeoanto.model.Standing;
 import br.com.firzen.campeoanto.repository.ParticipanteRepository;
 import br.com.firzen.campeoanto.services.CampeonatoService;
+
 
 @Controller
 @RequestMapping("/campeonato")
