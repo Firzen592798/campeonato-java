@@ -62,9 +62,12 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
+		  <groupId>org.springframework.boot</groupId>
+		  <artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
-			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
@@ -97,6 +100,13 @@
 	            <configuration>
 	                <source>14</source> <!-- depending on your project -->
 	                <target>14</target> <!-- depending on your project -->
+	                <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>       
+                    </annotationProcessorPaths>
 	                <annotationProcessorPaths>
 	                    <path>
 	                        <groupId>org.mapstruct</groupId>
