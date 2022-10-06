@@ -6,14 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-
-import br.com.firzen.campeoanto.validation.UniqueNome;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity
 @Table
