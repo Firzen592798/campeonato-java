@@ -20,8 +20,6 @@ import lombok.Setter;
 
 @Entity
 @Table
-@Getter
-@Setter
 public class Standing {
 	
 	public Standing() {
@@ -54,4 +52,52 @@ public class Standing {
 	@Column
 	@NotNull
 	private Integer pontosFora;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Participante getParticipante() {
+		return participante;
+	}
+
+	public void setParticipante(Participante participante) {
+		this.participante = participante;
+	}
+
+	public Campeonato getCampeonato() {
+		return campeonato;
+	}
+
+	public void setCampeonato(Campeonato campeonato) {
+		this.campeonato = campeonato;
+	}
+
+	public Integer getPosicao() {
+		return posicao;
+	}
+
+	public void setPosicao(Integer posicao) {
+		this.posicao = posicao;
+	}
+
+	public Integer getPontos() {
+		return pontos;
+	}
+
+	public void setPontos(Integer pontos) {
+		this.pontos = pontos;
+	}
+
+	public Integer getPontosFora() {
+		return pontosFora;
+	}
+
+	public void setPontosFora(Integer pontosFora) {
+		this.pontosFora = pontosFora;
+	}
 }

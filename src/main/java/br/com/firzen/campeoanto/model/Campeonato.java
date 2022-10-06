@@ -22,7 +22,6 @@ import lombok.Setter;
 
 @Entity
 @Table
-@Getter @Setter
 public class Campeonato {
 	@Id
 	@Column(name="id_campeonato")
@@ -50,5 +49,45 @@ public class Campeonato {
 	public void addStanding(Standing standing) {
 		this.standings.add(standing);
 		standing.setCampeonato(this);
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Integer getTemporada() {
+		return temporada;
+	}
+
+	public void setTemporada(Integer temporada) {
+		this.temporada = temporada;
+	}
+
+	public Integer getDivisao() {
+		return divisao;
+	}
+
+	public void setDivisao(Integer divisao) {
+		this.divisao = divisao;
+	}
+
+	public Integer getNumParticipantes() {
+		return numParticipantes;
+	}
+
+	public void setNumParticipantes(Integer numParticipantes) {
+		this.numParticipantes = numParticipantes;
+	}
+
+	public List<Standing> getStandings() {
+		return standings;
+	}
+
+	public void setStandings(List<Standing> standings) {
+		this.standings = standings;
 	}
 }

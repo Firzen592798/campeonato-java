@@ -6,9 +6,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import lombok.NoArgsConstructor;
 
 @ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR, reason = "Ocorreu um erro na execução")
-@NoArgsConstructor
 public class RestException extends Exception {
 	public RestException(String msg) {
 		super(msg);
+	}
+	public RestException() {
+		super();
 	}
 }

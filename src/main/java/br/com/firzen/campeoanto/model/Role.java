@@ -12,8 +12,6 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "roles")
-@Getter
-@Setter
 public class Role {
     @Id
     @Column(name = "role_id")
@@ -24,6 +22,15 @@ public class Role {
     public Long getId() {
         return id;
     }
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
      
     // remaining getters and setters   
 }

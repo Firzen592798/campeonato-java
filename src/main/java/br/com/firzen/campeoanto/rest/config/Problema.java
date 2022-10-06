@@ -11,8 +11,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 @JsonInclude(Include.NON_NULL) //O JSON gerado inclui apenas os campos não nulos, fazendo com que campos seja ignorado caso não precise
-@Getter
-@Setter
 public class Problema {
 	
 	private Integer status;
@@ -23,11 +21,59 @@ public class Problema {
 	
 	private List<Campo> campos;
 	
-	@Getter
-	@AllArgsConstructor
+
 	public static class Campo{
+		public Campo(String nome, String mensagem) {
+			super();
+			this.nome = nome;
+			this.mensagem = mensagem;
+		}
 		private String nome;
 		private String mensagem;
+		public String getNome() {
+			return nome;
+		}
+		public void setNome(String nome) {
+			this.nome = nome;
+		}
+		public String getMensagem() {
+			return mensagem;
+		}
+		public void setMensagem(String mensagem) {
+			this.mensagem = mensagem;
+		}
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	public OffsetDateTime getDataHora() {
+		return dataHora;
+	}
+
+	public void setDataHora(OffsetDateTime dataHora) {
+		this.dataHora = dataHora;
+	}
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+	public List<Campo> getCampos() {
+		return campos;
+	}
+
+	public void setCampos(List<Campo> campos) {
+		this.campos = campos;
 	}
 	
 }
