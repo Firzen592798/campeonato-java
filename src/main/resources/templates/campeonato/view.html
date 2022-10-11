@@ -11,8 +11,9 @@
 </head>
 <body>
 	<section layout:fragment="content">
-		<div class="d-flex justify-content-between">
-		<h2>Participantes</h2>
+		<div class="d-flex align-items-center gap-2 mt-4">
+		<h2 class="me-auto">Participantes</h2>
+		<a class="btn btn-success" th:href="@{/campeonato/{temporada}/{divisao}/nova-divisao(temporada=${campeonatoLista[0].temporada}, divisao=${campeonatoLista.size() + 1})}">Nova divisão</a>
 		<a class="btn btn-cancel" th:href="@{/campeonato}">Voltar</a>
 		</div>
 		<div th:each="campeonato: ${campeonatoLista}">
@@ -23,13 +24,14 @@
 				
 				<div class="button-group">
 					<a class="btn btn-primary" th:href="@{/campeonato/participantes(id=${campeonato.id})}"><i
-						class="bi bi-sticky"></i> Editar</a>
-					<a class="btn btn-danger" th:href="@{/campeonato/delete/{id}(id=${campeonato.id})}"><i
+						class="bi bi-sticky"></i> Editar Participantes</a>
+					<a class="btn btn-danger" th:href="@{/campeonato/divisao/delete/{id}(id=${campeonato.id})}"><i
 						class="bi bi-eraser"></i> Apagar</a>
 				</div>
 			</div>
 			<br/>
-			<table class="custom-table">
+			
+			<table class="custom-table" th:if="${!#lists.isEmpty(campeonato?.standings)}">
 				<thead>
 					<tr>
 						<th>Posição</th>
@@ -47,6 +49,9 @@
 					</tr>
 				</tbody>
 			</table>
+			
+			<p th:if="${#lists.isEmpty(campeonato?.standings)}">Não há participantes cadastrados.</p>
+			
 		</div>
 	</section>
 </body>

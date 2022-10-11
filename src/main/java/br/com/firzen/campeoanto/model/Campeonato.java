@@ -35,8 +35,6 @@ public class Campeonato {
 	@Min(value = 1, message = "Precisa ser maior do que 1") @Max(value = 4, message = "Precisa ser menor do que 4")
 	private Integer divisao;
 	
-	@Transient
-	private Integer numParticipantes;
 	
 	@Valid
 	@OneToMany(mappedBy = "campeonato", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -70,14 +68,6 @@ public class Campeonato {
 
 	public void setDivisao(Integer divisao) {
 		this.divisao = divisao;
-	}
-
-	public Integer getNumParticipantes() {
-		return numParticipantes;
-	}
-
-	public void setNumParticipantes(Integer numParticipantes) {
-		this.numParticipantes = numParticipantes;
 	}
 
 	public List<Standing> getStandings() {

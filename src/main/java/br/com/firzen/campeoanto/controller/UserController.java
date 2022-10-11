@@ -41,6 +41,7 @@ public class UserController extends AbstractController<User> {
 	public String edit(@PathVariable Long id, Model model) {
 		User user = service.findById(id).orElseThrow(() -> new IllegalArgumentException());
 		model.addAttribute("user", user);
+		model.addAttribute("roleLista", roleRepository.findAll());
 		return URL_PAGE + URL_FORM;
 	}
 

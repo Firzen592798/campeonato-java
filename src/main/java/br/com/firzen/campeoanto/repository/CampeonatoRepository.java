@@ -17,5 +17,8 @@ public interface CampeonatoRepository extends CrudRepository<Campeonato, Long> {
 	public Optional<Campeonato> findByTemporadaAndDivisao(Integer temporada, Integer divisao);
 
 	public List<Campeonato> findByTemporadaOrderByDivisaoAsc(Integer temporada);
+	
+	@Query("select c from Campeonato c where c.temporada = (select max(c2.temporada) from Campeonato c2) and divisao = 1 order by temporada desc")
+	public Campeonato findLastCampeonato();
 
 }

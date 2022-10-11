@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,7 +50,11 @@ public class CampeonatoController extends AbstractController<Campeonato> {
 	@GetMapping(URL_FORM)
 	public ModelAndView form() {
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("campeonato", new Campeonato());
+		Campeonato last = ((CampeonatoService)service).findLastCampeonato();
+		Campeonato campeonato = new Campeonato();
+		campeonato.setTemporada(last.getTemporada() + 1);
+		campeonato.setDivisao(1);
+		modelAndView.addObject("campeonato", campeonato);
 		return modelAndView;
 	}
 	
@@ -77,15 +82,26 @@ public class CampeonatoController extends AbstractController<Campeonato> {
 		return modelAndView;
 	}
 	
+	@Transactional
+	@GetMapping("/{temporada}/{divisao}/nova-divisao")
+	public ModelAndView novaDivisao(@PathVariable Integer temporada, @PathVariable Integer divisao) {
+		Campeonato campeonato = new Campeonato();
+		campeonato.setTemporada(temporada);
+		campeonato.setDivisao(divisao);
+		campeonato = ((CampeonatoService)service).save(campeonato);
+		ModelAndView modelAndView = new ModelAndView(new RedirectView("/"+URL_PAGE+URL_PARTICIPANTES+"?id="+campeonato.getId(), true));
+		return modelAndView;
+	}
+	
 	@GetMapping(URL_PARTICIPANTES)
 	public ModelAndView addParticipante(@RequestParam Long id) throws NotFoundException {
 		Campeonato campeonato = service.findById(id).orElseThrow(() ->new NotFoundException());
 		if(campeonato.getStandings().isEmpty()) {
-			campeonato.setNumParticipantes(1);
+			//campeonato.setNumParticipantes(1);
 			campeonato.setStandings(new ArrayList<Standing>());
-			for(int i = 0; i < campeonato.getNumParticipantes(); i++) {
+			//for(int i = 0; i < campeonato.getNumParticipantes(); i++) {
 				campeonato.addStanding(new Standing());
-			}
+			//}
 		}
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("campeonato", campeonato);
@@ -158,10 +174,11 @@ public class CampeonatoController extends AbstractController<Campeonato> {
 	    return ma;
 	}
 	
-	@GetMapping(URL_DELETE+"{id}")
-	public ModelAndView delete(@PathVariable("id") long id) {
-		Campeonato user = service.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid campeonato Id:" + id));
-		service.delete(user);
-		return new ModelAndView(new RedirectView("/"));
+	@GetMapping("/divisao/delete/{id}")
+	public ModelAndView delete(@PathVariable("id") long id, RedirectAttributes ra) {
+		Campeonato campeonato = service.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid campeonato Id:" + id));
+		service.delete(campeonato);
+		ra.addFlashAttribute("success", "Deletado com sucesso");
+		return new ModelAndView(new RedirectView("/"+URL_PAGE+URL_VIEW+"/"+campeonato.getTemporada(), true));
 	}
 }

@@ -7,19 +7,27 @@
 <head>
 <!-- <link th:href="@{/global/global.css}" rel="stylesheet"> -->
 <title></title>
+<style>
+	.hidden{
+		visibility: hidden;
+	}
+</style>
 </head>
 <body>
 	<section layout:fragment="content">
+	<h2></h2>
 		<div class="form-container">
+			
 			<form th:object="${campeonato}"
 				th:action="@{/campeonato/participantes}" method="post">
 
 				<div class="field-error" th:if="${#fields.hasAnyErrors()}"
 					th:each="error : ${#fields.allErrors()}">[[${error}]]</div>
 				<div class="error" th:if="${error}">[[${error}]]</div>
-
+				
+					
 				<div class="space-between-center">
-					<h2>Participantes</h2>
+					<h2>Divisão [[${campeonato.divisao}]] | Participantes</h2>
 					<button type="submit" class="text-white btn btn-primary" name="addRow">Adicionar</button>
 				</div>
 				<hr />
@@ -54,19 +62,24 @@
 							placeholder="Pontos fora" type="number"
 							th:field="*{standings[__${status.index}__].pontosFora}"></input>
 					</div>
-					<div class="d-flex align-items-end col">
-						<button class="text-white btn btn-danger" th:value="${status.index}"
-							type="submit" name="removeRow">
-							<i class="bi bi-trash3 white"></i>
+					<div class="d-flex align-items-end col gap-2">
+						<button class="text-white btn btn-secondary" 
+							th:classAppend="${status.index + 1 == campeonato?.standings?.size ? 'hidden' : ''}"
+							type="submit" name="down" th:value="${status.index}" >
+							<i class="bi bi-arrow-down-circle"></i>
 						</button>
+						
 						<button class="text-white btn btn-secondary mx-1" th:value="${status.index}"
+							th:classAppend="${status.index == 0 ? 'hidden' : ''}"
 							type="submit" name="up">
 							<i class="bi bi-arrow-up-circle"></i>
 						</button>
-						<button class="text-white btn btn-secondary" th:value="${status.index}"
-							type="submit" name="down">
-							<i class="bi bi-arrow-down-circle"></i>
+						
+						<button class="text-white btn btn-danger" th:value="${status.index}" 
+							type="submit" name="removeRow">
+							<i class="bi bi-trash3 white"></i>
 						</button>
+						
 					</div>
 				</div>
 				<hr />

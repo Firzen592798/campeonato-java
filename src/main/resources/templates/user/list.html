@@ -17,12 +17,14 @@
 		        <thead>
 		        	<tr>
 		        		<th scope="col">Nome</th>
+		        		<th scope="col">Papel</th>
 		        		<th class="fixed-cell" scope="col">Ações</th>
 		        	</tr>
 		        </thead>
 		       	<tbody>
 			       	<tr th:each="user: ${userLista}">
 			       		<td th:text="${user.username}">></td>
+			       		<td th:text="${user.rolesString}">></td>
 			       		<td class="text-center">
 			       			<a class="btn btn-sm" th:href="@{/user/edit/{id}(id=${user.id})}"><i class="bi bi-pencil"></i></a>
 			       			<a class="btn btn-sm" th:href="@{/user/delete/{id}(id=${user.id})}"><i class="bi bi-eraser"></i></a>

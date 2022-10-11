@@ -41,4 +41,8 @@ public class CampeonatoService extends AbstractService<Campeonato>{
 		List<Campeonato> campeonatos = findByTemporada(temporada);
 		campeonatos.stream().forEach(this::delete);
 	}
+	
+	public Campeonato findLastCampeonato() {
+		return ((CampeonatoRepository) repository).findLastCampeonato();
+	}
 }

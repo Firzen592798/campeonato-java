@@ -2,6 +2,7 @@ package br.com.firzen.campeoanto.model;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -77,5 +78,8 @@ public class User {
 		this.roles = roles;
 	}
 
+	public String getRolesString() {
+		return roles.stream().map(role -> role.getName()).collect(Collectors.joining(","));
+	}
     // remaining getters and setters are not shown for brevity
 }

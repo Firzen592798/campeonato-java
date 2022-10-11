@@ -26,9 +26,9 @@
 		       			<span th:if="${#fields.hasErrors('password')}" class="field-error"  th:errors="*{password}"></span>
 		       		</div>
 		       		
-		       		<div class="form-group col">
+		       		<div class="form-group col-md-4 col-12">
 						<label for="papel">Papel:</label> 
-						<select id="papel" class="form-select-sm" th:field="*{roles}">
+						<select id="papel" class="form-control form-select-sm" th:field="*{roles}">
 							<option value="-1">Escolha um papel...</option>
 							<option th:each="opt: ${roleLista}"
 								th:value="${opt.id}" th:text="${opt.name}"></option>

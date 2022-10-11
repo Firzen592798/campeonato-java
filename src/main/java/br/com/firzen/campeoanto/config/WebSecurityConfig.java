@@ -1,21 +1,19 @@
 package br.com.firzen.campeoanto.config;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -69,31 +67,40 @@ public class WebSecurityConfig {
 		// dont authenticate this particular request
 		.authorizeRequests().antMatchers("/authenticate").permitAll().
 		and().authorizeRequests().antMatchers("/firzen/authenticate").permitAll().
-		//antMatchers("/rest/**").authenticated().
-		and().
-		exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
-		.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		antMatchers("/rest/**").authenticated();
+		
+    	//http.exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     	
-    	// Add a filter to validate the tokens with every request
+    	http = http.exceptionHandling()
+                .authenticationEntryPoint(
+                    (request, response, ex) -> {
+                        response.sendError(
+                            HttpServletResponse.SC_UNAUTHORIZED,
+                            ex.getMessage()
+                        );
+                    }
+                )
+                .and();
+
     	http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     			
-//        http.authorizeRequests().antMatchers("/", "/home").permitAll()
-//			.antMatchers("/campeonato/**").authenticated()
-//			.antMatchers("/participante/**").authenticated()
-//			.anyRequest().permitAll()
-//			.and()
-//		.formLogin()
-//			.loginPage("/login")
-//			.defaultSuccessUrl("/campeonato", true)
-//			.permitAll()
-//			.and()
-//		.logout()
-//		.logoutUrl("/logout")
-//		.logoutSuccessUrl("/login")
-//			.permitAll()
-//			.and()
-//        .exceptionHandling().accessDeniedPage("/403");
-//        http.headers().frameOptions().sameOrigin();
+        http.authorizeRequests().antMatchers("/", "/home").permitAll()
+			//.antMatchers("/campeonato/**").authenticated()
+			//.antMatchers("/participante/**").authenticated()
+			.anyRequest().permitAll()
+			.and()
+		.formLogin()
+			.loginPage("/login")
+			.defaultSuccessUrl("/campeonato", true)
+			.permitAll()
+			.and()
+		.logout()
+		.logoutUrl("/logout")
+		.logoutSuccessUrl("/login")
+			.permitAll()
+			.and()
+        .exceptionHandling().accessDeniedPage("/403");
+        http.headers().frameOptions().sameOrigin();
  
         return http.build();
     }

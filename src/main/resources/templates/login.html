@@ -3,18 +3,66 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
     <head>
         <title>Spring Security Example </title>
+    <style>
+    
+    	body{
+    		background: silver;
+    	}
+    	.login-error{
+    		background-color: magenta;
+    		padding: 4px;
+    	}
+    	.login{
+    		position: relative;
+    		background: navy;
+    		border: 1px solid black;
+    		border-radius: 5px;
+    		color: white;
+    		max-width: 400px;
+    		margin: 15% auto;
+    		padding: 20px 20px;
+    	}
+    	#btn-login{
+    		color: black;
+    		background-color: orange;
+    		cursor: pointer;
+    		padding: 5px;
+    		border-radius: 2px;
+    		width: 100%;
+    	}
+    	.form-input{
+    		display: flex;
+    		margin: 10px 0px;
+    		justify-content: space-between;
+    	}
+    	.form-input input{
+    		padding: 5px;
+    		border-radius: 5px;
+    		width: 240px;
+    	}
+    </style>
     </head>
     <body>
-        <div th:if="${param.error}">
-            Invalid username and password.
+       
+        <div class="login">
+        	 <span class="login-error"  th:if="${param.error}">
+	            Usuário ou senha incorretos
+	        </span>
+	        <span class="login-error" th:if="${param.logout}">
+	            You have been logged out.
+	        </span>
+	        <h2>Login</h2>
+	        <form th:action="@{/login}" method="post">
+	            <div class="form-input">
+	            	<label> User Name : </label>
+	            	 <input type="text" name="username"/>
+	            </div>
+	            <div class="form-input">
+	            	<label> Password:</label>
+	            	<input type="password" name="password"/>
+	            </div>
+	            <div><input id="btn-login" type="submit" value="Login"/></div>
+	        </form>
         </div>
-        <div th:if="${param.logout}">
-            You have been logged out.
-        </div>
-        <form th:action="@{/login}" method="post">
-            <div><label> User Name : <input type="text" name="username"/> </label></div>
-            <div><label> Password: <input type="password" name="password"/> </label></div>
-            <div><input type="submit" value="Sign In"/></div>
-        </form>
     </body>
 </html>
