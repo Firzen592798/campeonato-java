@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -62,32 +63,15 @@ public class WebSecurityConfig {
  
     
     @Bean
+    //@Order(2)
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    	http.csrf().disable()
-		// dont authenticate this particular request
-		.authorizeRequests().antMatchers("/authenticate").permitAll().
-		and().authorizeRequests().antMatchers("/firzen/authenticate").permitAll().
-		antMatchers("/rest/**").authenticated();
-		
-    	//http.exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-    	
-    	http = http.exceptionHandling()
-                .authenticationEntryPoint(
-                    (request, response, ex) -> {
-                        response.sendError(
-                            HttpServletResponse.SC_UNAUTHORIZED,
-                            ex.getMessage()
-                        );
-                    }
-                )
-                .and();
+    	http.csrf().disable();
 
-    	http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-    			
         http.authorizeRequests().antMatchers("/", "/home").permitAll()
-			//.antMatchers("/campeonato/**").authenticated()
-			//.antMatchers("/participante/**").authenticated()
-			.anyRequest().permitAll()
+			.antMatchers("/campeonato/**").authenticated()
+			.antMatchers("/participante/**").authenticated()
+			.antMatchers("/login").permitAll()
+			//.antMatchers("/rest/**").denyAll()
 			.and()
 		.formLogin()
 			.loginPage("/login")
@@ -100,6 +84,34 @@ public class WebSecurityConfig {
 			.permitAll()
 			.and()
         .exceptionHandling().accessDeniedPage("/403");
+        http.headers().frameOptions().sameOrigin();
+ 
+        return http.build();
+    }
+    
+    
+    @Bean
+    //@Order(1)
+    public SecurityFilterChain filterChainRest(HttpSecurity http) throws Exception {
+    	http.csrf().disable().authorizeRequests().antMatchers("/authenticate").permitAll()
+    	.and().authorizeRequests().antMatchers("/firzen/authenticate").permitAll()
+    	.antMatchers("/rest/**").authenticated();
+		
+    	http.exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+    	
+    	http = http.exceptionHandling()
+	        .authenticationEntryPoint(
+	            (request, response, ex) -> {
+	                response.sendError(
+	                    HttpServletResponse.SC_UNAUTHORIZED,
+	                    ex.getMessage()
+	                );
+	            }
+	        )
+	        .and();
+
+    	http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+    			
         http.headers().frameOptions().sameOrigin();
  
         return http.build();
