@@ -6,7 +6,7 @@
 ![css](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 
 Projeto para gerenciamento de posições em um campeonato, permitindo cadastrar os participantes, pontos em casa e pontos fora de casa
-O projeto é foi criado apenas para fins de aprendizado e hobby pessoal, e não permite rodar nenhum campeonato. Caso queira ver os projetos que executam um campeonato, tenho esses dois: [Campeonato de Dados](https://github.com/Firzen592798/CampeonatoDeDados) [Campeonato de Dados Indireto](https://github.com/Firzen592798/CampeonatoDeDadosIndireto)
+O projeto é foi criado apenas para fins de aprendizado e hobby pessoal, e não permite rodar nenhum campeonato. Caso queira ver os projetos que executam um campeonato, tenho esses dois: [Campeonato de Dados](https://github.com/Firzen592798/CampeonatoDeDados) e [Campeonato de Dados Indireto](https://github.com/Firzen592798/CampeonatoDeDadosIndireto)
 
 # Telas do sistema
 Pendente...
